@@ -61,8 +61,13 @@ gameInfo* initGame(double startSpeed, double acc, double gravity, int prevHighsc
   return result;
 }
 
-void cleanUpGame(gameInfo* info) {
-	free(info);
+void cleanUpGame(gameInfo** info) {
+  if (*info == 0) {
+    return;
+  }
+
+	free(*info);
+  *info = 0;
 }
 
 

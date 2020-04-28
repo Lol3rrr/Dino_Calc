@@ -55,12 +55,23 @@ void renderEndScreen(int score) {
 	renderCenterMiniText(160, continueMessage, COLOR_BLACK, COLOR_WHITE);
 }
 
-void renderMainMenu() {
+void renderMainMenu(int selected) {
   unsigned char* mainMenuScreen = (unsigned char*) "Dinosaur";
 	renderCenterMiniText(0, mainMenuScreen, COLOR_BLACK, COLOR_WHITE);
 
-	unsigned char* continueMessage = (unsigned char*) "Press EXE to start...";
-	renderCenterMiniText(75, continueMessage, COLOR_BLACK, COLOR_WHITE);
+	unsigned char* startGame = (unsigned char*) "Start";
+	if (selected == 0) {
+		renderCenterMiniText(50, startGame, COLOR_WHITE, COLOR_BLACK);
+	} else {
+		renderCenterMiniText(50, startGame, COLOR_BLACK, COLOR_WHITE);
+	}
+
+	unsigned char* settings = (unsigned char*) "Settings";
+	if (selected == 1) {
+		renderCenterMiniText(75, settings, COLOR_WHITE, COLOR_BLACK);
+	} else {
+		renderCenterMiniText(75, settings, COLOR_BLACK, COLOR_WHITE);
+	}
 }
 
 

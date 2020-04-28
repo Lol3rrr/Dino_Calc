@@ -52,20 +52,43 @@ int main() {
 				continue;
 			}
 		} else if (status == MAIN_MENU) {
-			renderMainMenu();
-			Bdisp_PutDisp_DD();
+			int key;
+			int selected = 0;
 
-      int key;
-      GetKey(&key);
+			cleanUpGame(&info);
 
-			while (key != KEY_CTRL_EXE) {
+			while (1) {
+				Bdisp_AllClr_VRAM();
+
+				renderMainMenu(selected);
+				Bdisp_PutDisp_DD();
+				
 				GetKey(&key);
+
+				if (key == KEY_CTRL_EXE) {
+					break;
+				}
+
+				if (key == KEY_CTRL_UP) {
+					selected += -1;
+				}
+				if (key == KEY_CTRL_DOWN) {
+					selected += 1;
+				}
+
+				if (selected < 0) {
+					selected = 0;
+				}
+				if (selected > 1) {
+					selected = 1;
+				}
 			}
 
-			cleanUpGame(info);
-			info = initGame(START_SPEED, SPEED_ACC, GRAVITY, highscore);
+			if (selected == 0) {
+				info = initGame(START_SPEED, SPEED_ACC, GRAVITY, highscore);
 
-			status = RUNNING;
+				status = RUNNING;
+			}
 		}
 	}
 
