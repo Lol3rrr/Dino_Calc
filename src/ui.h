@@ -9,6 +9,7 @@ void renderInGamePauseUI();
 void renderEndScreen(int score);
 void renderMainMenu(int selected);
 void renderSettingsMenu(int selected);
+void renderConfirmation(int selected);
 
 
 void renderInGameUI(int score, int highscore) {
@@ -84,6 +85,32 @@ void renderSettingsMenu(int selected) {
 		renderCenterMiniText(50, backStr, COLOR_WHITE, COLOR_BLACK);
 	} else {
 		renderCenterMiniText(50, backStr, COLOR_BLACK, COLOR_WHITE);
+	}
+
+	unsigned char* deleteHighscore = (unsigned char*) "Delete Highscore";
+	if (selected == 1) {
+		renderCenterMiniText(75, deleteHighscore, COLOR_WHITE, COLOR_BLACK);
+	} else {
+		renderCenterMiniText(75, deleteHighscore, COLOR_BLACK, COLOR_WHITE);
+	}
+}
+
+void renderConfirmation(int selected) {
+	unsigned char* settingsStr = (unsigned char*) "Are you sure?";
+	renderCenterMiniText(0, settingsStr, COLOR_BLACK, COLOR_WHITE);
+
+	unsigned char* noStr = (unsigned char*) "No";
+	if (selected == 0) {
+		renderMiniText(125, 50, noStr, COLOR_WHITE, COLOR_BLACK);
+	} else {
+		renderMiniText(125, 50, noStr, COLOR_BLACK, COLOR_WHITE);
+	}
+
+	unsigned char* yesStr = (unsigned char*) "Yes";
+	if (selected == 1) {
+		renderMiniText(200, 50, yesStr, COLOR_WHITE, COLOR_BLACK);
+	} else {
+		renderMiniText(200, 50, yesStr, COLOR_BLACK, COLOR_WHITE);
 	}
 }
 

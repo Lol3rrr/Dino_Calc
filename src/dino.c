@@ -10,6 +10,7 @@
 #include "highscore.h"
 #include "menus/mainMenu.h"
 #include "menus/settingsMenu.h"
+#include "menus/confirmation.h"
 
 
 #define RUNNING 0
@@ -49,7 +50,7 @@ int main() {
 				status = MAIN_MENU;
         if (result > highscore) {
           highscore = result;
-          writeHighscore(highscore);
+          saveHighscore(highscore);
         }
 
 				continue;
@@ -68,6 +69,15 @@ int main() {
 			int selectedOption = settingsMenu();
 
 			if (selectedOption == 0) {
+				status = MAIN_MENU;
+			}
+			if (selectedOption == 1) {
+				int confirmed = askConfirmation();
+				if (!confirmed) {
+					continue;
+				}
+
+				deleteHighscore();
 				status = MAIN_MENU;
 			}
 		}
