@@ -55,7 +55,7 @@ int main() {
 				continue;
 			}
 		} else if (status == MAIN_MENU) {
-			int selectedOption = displayMainMenu();
+			int selectedOption = mainMenu();
 
 			if (selectedOption == 0) {
 				info = initGame(START_SPEED, SPEED_ACC, GRAVITY, highscore);
@@ -65,7 +65,7 @@ int main() {
 				status = SETTINGS_MENU;
 			}
 		} else if (status == SETTINGS_MENU) {
-			int selectedOption = displaySettingsMenu();
+			int selectedOption = settingsMenu();
 
 			if (selectedOption == 0) {
 				status = MAIN_MENU;

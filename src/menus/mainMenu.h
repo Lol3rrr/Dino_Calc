@@ -9,9 +9,9 @@
 // Returns
 // 0: Start Game
 // 1: Open Settings Menu
-int displayMainMenu();
+int mainMenu();
 
-int displayMainMenu() {
+int mainMenu() {
   int key;
   int selected = 0;
 

@@ -8,9 +8,9 @@
 
 // Returns
 // 0: Back to Main-Menu
-int displaySettingsMenu();
+int settingsMenu();
 
-int displaySettingsMenu() {
+int settingsMenu() {
   int key;
   int selected = 0;
 
