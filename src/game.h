@@ -4,9 +4,9 @@
 #include "general.h"
 
 #include "ui.h"
-#include "player.h"
-#include "cactus.h"
-#include "bird.h"
+#include "entities/player.h"
+#include "entities/cactus.h"
+#include "entities/bird.h"
 
 #include "engine/input.h"
 #include "engine/utils.h"
@@ -61,8 +61,13 @@ gameInfo* initGame(double startSpeed, double acc, double gravity, int prevHighsc
   return result;
 }
 
-void cleanUpGame(gameInfo* info) {
-	free(info);
+void cleanUpGame(gameInfo** info) {
+  if (*info == 0) {
+    return;
+  }
+
+	free(*info);
+  *info = 0;
 }
 
 

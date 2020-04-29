@@ -8,11 +8,15 @@
 #include "ui.h"
 #include "game.h"
 #include "highscore.h"
+#include "menus/mainMenu.h"
+#include "menus/settingsMenu.h"
+#include "menus/confirmation.h"
 
 
-#define RUNNING 1
-#define END_SCREEN 0
-#define MAIN_MENU -1
+#define RUNNING 0
+#define END_SCREEN 1
+#define MAIN_MENU 2
+#define SETTINGS_MENU 3
 
 #define START_SPEED 4
 #define SPEED_ACC 1.001
@@ -46,26 +50,36 @@ int main() {
 				status = MAIN_MENU;
         if (result > highscore) {
           highscore = result;
-          writeHighscore(highscore);
+          saveHighscore(highscore);
         }
 
 				continue;
 			}
 		} else if (status == MAIN_MENU) {
-			renderMainMenu();
-			Bdisp_PutDisp_DD();
+			int selectedOption = mainMenu();
 
-      int key;
-      GetKey(&key);
+			if (selectedOption == 0) {
+				info = initGame(START_SPEED, SPEED_ACC, GRAVITY, highscore);
 
-			while (key != KEY_CTRL_EXE) {
-				GetKey(&key);
+				status = RUNNING;
+			} else if (selectedOption == 1) {
+				status = SETTINGS_MENU;
 			}
+		} else if (status == SETTINGS_MENU) {
+			int selectedOption = settingsMenu();
 
-			cleanUpGame(info);
-			info = initGame(START_SPEED, SPEED_ACC, GRAVITY, highscore);
+			if (selectedOption == 0) {
+				status = MAIN_MENU;
+			}
+			if (selectedOption == 1) {
+				int confirmed = askConfirmation();
+				if (!confirmed) {
+					continue;
+				}
 
-			status = RUNNING;
+				deleteHighscore();
+				status = MAIN_MENU;
+			}
 		}
 	}
 

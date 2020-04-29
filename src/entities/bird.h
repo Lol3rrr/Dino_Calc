@@ -1,7 +1,7 @@
 #ifndef BIRD_H
 #define BIRD_H
 
-#include "engine/render.h"
+#include "../engine/render.h"
 
 #define CACTUS_MIN_DISTANCE 80
 #define CACTUS_MAX_DISTANCE 150
