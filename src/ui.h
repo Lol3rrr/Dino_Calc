@@ -7,7 +7,8 @@
 void renderInGameUI(int score, int highscore);
 void renderInGamePauseUI();
 void renderEndScreen(int score);
-void renderMainMenu();
+void renderMainMenu(int selected);
+void renderSettingsMenu(int selected);
 
 
 void renderInGameUI(int score, int highscore) {
@@ -71,6 +72,18 @@ void renderMainMenu(int selected) {
 		renderCenterMiniText(75, settings, COLOR_WHITE, COLOR_BLACK);
 	} else {
 		renderCenterMiniText(75, settings, COLOR_BLACK, COLOR_WHITE);
+	}
+}
+
+void renderSettingsMenu(int selected) {
+	unsigned char* settingsStr = (unsigned char*) "Settings";
+	renderCenterMiniText(0, settingsStr, COLOR_BLACK, COLOR_WHITE);
+
+	unsigned char* backStr = (unsigned char*) "Back";
+	if (selected == 0) {
+		renderCenterMiniText(50, backStr, COLOR_WHITE, COLOR_BLACK);
+	} else {
+		renderCenterMiniText(50, backStr, COLOR_BLACK, COLOR_WHITE);
 	}
 }
 

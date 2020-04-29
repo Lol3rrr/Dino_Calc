@@ -8,11 +8,14 @@
 #include "ui.h"
 #include "game.h"
 #include "highscore.h"
+#include "menus/mainMenu.h"
+#include "menus/settingsMenu.h"
 
 
-#define RUNNING 1
-#define END_SCREEN 0
-#define MAIN_MENU -1
+#define RUNNING 0
+#define END_SCREEN 1
+#define MAIN_MENU 2
+#define SETTINGS_MENU 3
 
 #define START_SPEED 4
 #define SPEED_ACC 1.001
@@ -52,42 +55,20 @@ int main() {
 				continue;
 			}
 		} else if (status == MAIN_MENU) {
-			int key;
-			int selected = 0;
+			int selectedOption = displayMainMenu();
 
-			cleanUpGame(&info);
-
-			while (1) {
-				Bdisp_AllClr_VRAM();
-
-				renderMainMenu(selected);
-				Bdisp_PutDisp_DD();
-				
-				GetKey(&key);
-
-				if (key == KEY_CTRL_EXE) {
-					break;
-				}
-
-				if (key == KEY_CTRL_UP) {
-					selected += -1;
-				}
-				if (key == KEY_CTRL_DOWN) {
-					selected += 1;
-				}
-
-				if (selected < 0) {
-					selected = 0;
-				}
-				if (selected > 1) {
-					selected = 1;
-				}
-			}
-
-			if (selected == 0) {
+			if (selectedOption == 0) {
 				info = initGame(START_SPEED, SPEED_ACC, GRAVITY, highscore);
 
 				status = RUNNING;
+			} else if (selectedOption == 1) {
+				status = SETTINGS_MENU;
+			}
+		} else if (status == SETTINGS_MENU) {
+			int selectedOption = displaySettingsMenu();
+
+			if (selectedOption == 0) {
+				status = MAIN_MENU;
 			}
 		}
 	}
