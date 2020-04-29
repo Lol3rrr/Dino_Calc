@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "engine/collision.h"
-#include "engine/render.h"
-#include "movement.h"
+#include "../engine/collision.h"
+#include "../engine/render.h"
+#include "../movement.h"
 
 #include "cactus.h"
 #include "bird.h"

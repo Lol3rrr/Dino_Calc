@@ -2,7 +2,7 @@
 #define UI_H
 
 #include "engine/render.h"
-#include "player.h"
+#include "entities/player.h"
 
 void renderInGameUI(int score, int highscore);
 void renderInGamePauseUI();

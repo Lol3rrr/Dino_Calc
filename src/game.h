@@ -4,9 +4,9 @@
 #include "general.h"
 
 #include "ui.h"
-#include "player.h"
-#include "cactus.h"
-#include "bird.h"
+#include "entities/player.h"
+#include "entities/cactus.h"
+#include "entities/bird.h"
 
 #include "engine/input.h"
 #include "engine/utils.h"

@@ -3,8 +3,8 @@
 
 #include <stdlib.h>
 
-#include "engine/render.h"
-#include "engine/collision.h"
+#include "../engine/render.h"
+#include "../engine/collision.h"
 
 #define CACTUS_SPAWN_SPREAD 100
 
