@@ -1,10 +1,11 @@
 #ifndef BIRD_H
 #define BIRD_H
 
+#include "entity.h"
+
 #include "../engine/render.h"
 
-#define CACTUS_MIN_DISTANCE 80
-#define CACTUS_MAX_DISTANCE 150
+#define BIRD_SPAWN_SPREAD 50
 
 typedef struct bird{
   int x;
@@ -65,10 +66,9 @@ int BIRD_SPRITE_2[BIRD_SPRITE_HEIGHT][BIRD_SPRITE_WIDTH] = {
 void spawnRandomBird(bird* pBird, int ground, int prevCactus, double currentSpeed) {
   int level = rand() % 3;
 
-  int yCoord = ground - (BIRD_SPRITE_HEIGHT * BIRD_SPRITE_SCALE) - (25 * level);
-  int xCoord = prevCactus + ((rand() % (CACTUS_MAX_DISTANCE - CACTUS_MIN_DISTANCE)) + CACTUS_MIN_DISTANCE) * (currentSpeed / 3);
+  int yCoord = ground - (BIRD_SPRITE_HEIGHT * BIRD_SPRITE_SCALE) - (28 * level);
 
-  pBird->x = xCoord;
+  pBird->x = calculateDistance(prevCactus, currentSpeed, BIRD_SPAWN_SPREAD);
   pBird->y = yCoord;
   pBird->animationFrame = 0;
 }
