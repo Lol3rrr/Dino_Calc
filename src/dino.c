@@ -78,6 +78,7 @@ int main() {
 				}
 
 				deleteHighscore();
+				highscore = 0;
 				status = MAIN_MENU;
 			}
 		}
