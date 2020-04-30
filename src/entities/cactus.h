@@ -3,10 +3,12 @@
 
 #include <stdlib.h>
 
+#include "entity.h"
+
 #include "../engine/render.h"
 #include "../engine/collision.h"
 
-#define CACTUS_SPAWN_SPREAD 100
+#define CACTUS_SPAWN_SPREAD 75
 
 #define CACTUS_SPRITE_SCALE 2
 
@@ -65,7 +67,7 @@ int CACTUS_TWO_Sprite[CACTUS_TWO_SPRITE_HEIGHT][CACTUS_TWO_SPRITE_WIDTH] = {
   {C_TRANS, C_TRANS, C_TRANS, C_BLACK, C_BLACK, C_BLACK, C_TRANS, C_TRANS, C_TRANS, C_TRANS, C_TRANS, C_BLACK, C_BLACK, C_BLACK, C_BLACK, C_TRANS, C_TRANS, C_TRANS, C_TRANS, C_TRANS, C_BLACK, C_BLACK, C_BLACK, C_TRANS, C_TRANS, C_TRANS}
 };
 
-void spawnRandomCactus(cactus* pCactus, int ground, int currentX, double currentSpeed) {
+void spawnRandomCactus(cactus* pCactus, int ground, int prevBird, double currentSpeed) {
   int type = rand() % 2;
   int typeHeight = 0;
   if (type == 0) {
@@ -74,9 +76,8 @@ void spawnRandomCactus(cactus* pCactus, int ground, int currentX, double current
     typeHeight = CACTUS_TWO_SPRITE_HEIGHT;
   }
   int yCoord = ground - (typeHeight * CACTUS_SPRITE_SCALE);
-  int xDelta = 320 + (rand() % CACTUS_SPAWN_SPREAD) * (currentSpeed / 3);
 
-  pCactus->x = currentX + xDelta;
+  pCactus->x = calculateDistance(prevBird, currentSpeed, CACTUS_SPAWN_SPREAD);
   pCactus->y = yCoord;
   pCactus->type = type;
 }

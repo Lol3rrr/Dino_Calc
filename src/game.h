@@ -145,7 +145,7 @@ int runGameCycle(gameInfo* info) {
     }
 
     if (isCactusOffScreen(&(info->nextCactus), info->score)) {
-      spawnRandomCactus(&(info->nextCactus), GROUND_LEVEL, info->score, info->xSpeed);
+      spawnRandomCactus(&(info->nextCactus), GROUND_LEVEL, info->nextBird.x, info->xSpeed);
     }
     if (isBirdOffScreen(&(info->nextBird), info->score)) {
       spawnRandomBird(&(info->nextBird), GROUND_LEVEL, info->nextCactus.x, info->xSpeed);
